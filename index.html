@@ -1,0 +1,456 @@
+<!-- <!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>واجهة آيفون خرافي</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #1c1c1c, #333);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        perspective: 1200px;
+    }
+
+    /* الظل الواقعي على المكتب */
+    .iphone-shadow {
+        position: relative;
+        transform: rotateX(10deg) rotateY(0deg);
+        box-shadow: 0 40px 60px rgba(0,0,0,0.6), 0 0 120px rgba(0,255,247,0.2) inset;
+        border-radius: 50px;
+    }
+
+    /* إطار الجوال ثلاثي الأبعاد */
+    .iphone {
+        width: 280px;
+        height: 600px;
+        border: 16px solid #222;
+        border-radius: 50px;
+        background: #000;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 0 0 3px #555 inset, 0 15px 40px rgba(0,0,0,0.8);
+        transform-style: preserve-3d;
+    }
+
+    /* الكاميرا الأمامية والسماعة */
+    .notch {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 28px;
+        background: #111;
+        border-radius: 0 0 20px 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+    }
+
+    .camera {
+        width: 10px;
+        height: 10px;
+        background: radial-gradient(circle, #ccc 0%, #555 70%);
+        border-radius: 50%;
+        margin-right: 18px;
+        box-shadow: 0 0 3px #fff inset;
+    }
+
+    .speaker {
+        width: 60px;
+        height: 5px;
+        background: #555;
+        border-radius: 3px;
+        box-shadow: 0 0 2px #fff inset;
+    }
+
+    /* شاشة الجوال - خلفية حقيقية مع ضوء ديناميكي */
+    .screen {
+        width: 100%;
+        height: 100%;
+        background: url('https://images.unsplash.com/photo-1603570418393-f8fc20ed5d0d?auto=format&fit=crop&w=280&q=80') no-repeat center center;
+        background-size: cover;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding-top: 40px;
+        position: relative;
+        box-shadow: 0 0 20px rgba(0,255,247,0.4) inset;
+    }
+
+    /* واجهة تسجيل الدخول */
+    .login-container {
+        width: 85%;
+        background: rgba(0,0,0,0.6);
+        backdrop-filter: blur(14px);
+        border-radius: 30px;
+        padding: 25px 20px;
+        text-align: center;
+        box-shadow: 0 6px 25px rgba(0,0,0,0.7), 0 0 15px rgba(0,255,247,0.4) inset;
+        color: #fff;
+        animation: fadeIn 1.5s ease-in-out;
+        border: 1px solid rgba(0,255,247,0.4);
+    }
+
+    .login-container h1 {
+        font-size: 1.9em;
+        margin-bottom: 25px;
+        color: #00fff7;
+        text-shadow: 0 0 10px #00fff7, 0 0 20px #00fff7;
+        animation: slideDown 1s ease forwards;
+    }
+
+    .input-field {
+        position: relative;
+        margin-bottom: 20px;
+    }
+
+    .input-field input {
+        width: 100%;
+        padding: 12px 20px;
+        border-radius: 50px;
+        border: none;
+        outline: none;
+        font-size: 1em;
+        background: rgba(255,255,255,0.15);
+        color: #fff;
+        transition: 0.4s;
+        box-shadow: 0 0 5px rgba(0,255,247,0.2) inset;
+    }
+
+    .input-field input:focus {
+        background: rgba(0, 255, 247,0.25);
+        box-shadow: 0 0 15px #00fff7, 0 0 10px #00fff7 inset;
+    }
+
+    .input-field label {
+        position: absolute;
+        top: 50%;
+        left: 20px;
+        transform: translateY(-50%);
+        color: rgba(255,255,255,0.7);
+        pointer-events: none;
+        transition: 0.3s;
+    }
+
+    .input-field input:focus + label,
+    .input-field input:not(:placeholder-shown) + label {
+        top: -12px;
+        left: 15px;
+        font-size: 0.8em;
+        color: #00fff7;
+        text-shadow: 0 0 6px #00fff7;
+    }
+
+    .btn {
+        width: 100%;
+        padding: 12px;
+        border: none;
+        border-radius: 50px;
+        background: linear-gradient(45deg, #00fff7, #0077ff);
+        color: #fff;
+        font-size: 1em;
+        cursor: pointer;
+        transition: 0.5s;
+        box-shadow: 0 5px 20px rgba(0,255,247,0.5);
+    }
+
+    .btn:hover {
+        background: linear-gradient(45deg, #0077ff, #00fff7);
+        box-shadow: 0 8px 25px rgba(0,255,247,0.7), 0 0 15px #00fff7 inset;
+        transform: scale(1.02);
+    }
+
+    .forgot {
+        margin-top: 15px;
+        display: block;
+        font-size: 0.85em;
+        color: rgba(255,255,255,0.7);
+        text-decoration: none;
+        transition: 0.3s;
+    }
+
+    .forgot:hover {
+        color: #00fff7;
+    }
+
+    /* الرسوم المتحركة */
+    @keyframes fadeIn {
+        0% {opacity: 0;}
+        100% {opacity: 1;}
+    }
+
+    @keyframes slideDown {
+        0% {opacity: 0; transform: translateY(-25px);}
+        100% {opacity: 1; transform: translateY(0);}
+    }
+
+</style>
+</head>
+<body>
+    <div class="iphone-shadow">
+        <div class="iphone">
+            <div class="notch">
+                <div class="camera"></div>
+                <div class="speaker"></div>
+            </div>
+            <div class="screen">
+                <div class="login-container">
+                    <h1>تسجيل الدخول</h1>
+                    <form action="#" method="post">
+                        <div class="input-field">
+                            <input type="text" name="username" id="username" placeholder=" " required>
+                            <label for="username">اسم المستخدم</label>
+                        </div>
+                        <div class="input-field">
+                            <input type="password" name="password" id="password" placeholder=" " required>
+                            <label for="password">كلمة المرور</label>
+                        </div>
+                        <button type="submit" class="btn">دخول</button>
+                        <a href="#" class="forgot">نسيت كلمة المرور؟</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+ -->
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>واجهة آيفون تفاعلية</title>
+<style>
+body {
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #1a1a1a, #2c2c2c);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    perspective: 1200px;
+}
+
+/* الظل الواقعي */
+.iphone-shadow {
+    position: relative;
+    transform: rotateX(12deg) rotateY(-8deg);
+    box-shadow: 0 40px 60px rgba(0,0,0,0.6);
+    border-radius: 50px;
+}
+
+/* إطار الجوال ثلاثي الأبعاد */
+.iphone {
+    width: 280px;
+    height: 600px;
+    border: 16px solid #222;
+    border-radius: 50px;
+    background: #000;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 0 3px #555 inset, 0 15px 40px rgba(0,0,0,0.8);
+    transform-style: preserve-3d;
+    transition: transform 0.3s;
+}
+
+/* الكاميرا والسماعة */
+.notch {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 120px;
+    height: 28px;
+    background: #111;
+    border-radius: 0 0 20px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+.camera {
+    width: 10px;
+    height: 10px;
+    background: radial-gradient(circle, #ccc 0%, #555 70%);
+    border-radius: 50%;
+    margin-right: 18px;
+    box-shadow: 0 0 3px #fff inset;
+}
+
+.speaker {
+    width: 60px;
+    height: 5px;
+    background: #555;
+    border-radius: 3px;
+    box-shadow: 0 0 2px #fff inset;
+}
+
+/* شاشة الجوال */
+.screen {
+    width: 100%;
+    height: 100%;
+    background: url('https://images.unsplash.com/photo-1603570418393-f8fc20ed5d0d?auto=format&fit=crop&w=280&q=80') no-repeat center center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 40px;
+    position: relative;
+    box-shadow: 0 0 20px rgba(0,255,247,0.4) inset;
+    transition: box-shadow 0.3s;
+}
+
+/* واجهة تسجيل الدخول */
+.login-container {
+    width: 85%;
+    background: rgba(0,0,0,0.6);
+    backdrop-filter: blur(14px);
+    border-radius: 30px;
+    padding: 25px 20px;
+    text-align: center;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.7), 0 0 15px rgba(0,255,247,0.4) inset;
+    color: #fff;
+    border: 1px solid rgba(0,255,247,0.4);
+    transition: box-shadow 0.3s, transform 0.3s;
+}
+
+.login-container h1 {
+    font-size: 1.9em;
+    margin-bottom: 25px;
+    color: #00fff7;
+    text-shadow: 0 0 10px #00fff7, 0 0 20px #00fff7;
+}
+
+/* الحقول */
+.input-field {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-field input {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 50px;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    transition: 0.4s;
+    box-shadow: 0 0 5px rgba(0,255,247,0.2) inset;
+}
+
+.input-field input:focus {
+    background: rgba(0,255,247,0.25);
+    box-shadow: 0 0 15px #00fff7, 0 0 10px #00fff7 inset;
+}
+
+.input-field label {
+    position: absolute;
+    top: 50%;
+    left: 20px;
+    transform: translateY(-50%);
+    color: rgba(255,255,255,0.7);
+    pointer-events: none;
+    transition: 0.3s;
+}
+
+.input-field input:focus + label,
+.input-field input:not(:placeholder-shown) + label {
+    top: -12px;
+    left: 15px;
+    font-size: 0.8em;
+    color: #00fff7;
+    text-shadow: 0 0 6px #00fff7;
+}
+
+/* زر الدخول */
+.btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(45deg, #00fff7, #0077ff);
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+    transition: 0.5s;
+    box-shadow: 0 5px 20px rgba(0,255,247,0.5);
+}
+
+.btn:hover {
+    background: linear-gradient(45deg, #0077ff, #00fff7);
+    box-shadow: 0 8px 25px rgba(0,255,247,0.7), 0 0 15px #00fff7 inset;
+    transform: scale(1.05);
+}
+
+.forgot {
+    margin-top: 15px;
+    display: block;
+    font-size: 0.85em;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.forgot:hover {
+    color: #00fff7;
+}
+
+/* حركة الجوال مع الماوس */
+.iphone-shadow:hover .iphone {
+    transform: rotateX(0deg) rotateY(0deg);
+    box-shadow: 0 50px 70px rgba(0,0,0,0.7);
+}
+
+.screen:hover {
+    box-shadow: 0 0 40px rgba(0,255,247,0.6) inset, 0 0 30px rgba(0,255,247,0.3);
+}
+
+.login-container:hover {
+    box-shadow: 0 10px 30px rgba(0,255,247,0.7), 0 0 20px rgba(0,255,247,0.5) inset;
+    transform: translateY(-2px);
+}
+</style>
+</head>
+<body>
+    <div class="iphone-shadow">
+        <div class="iphone">
+            <div class="notch">
+                <div class="camera"></div>
+                <div class="speaker"></div>
+            </div>
+            <div class="screen">
+                <div class="login-container">
+                    <h1>تسجيل الدخول</h1>
+                    <form action="#" method="post">
+                        <div class="input-field">
+                            <input type="text" name="username" id="username" placeholder=" " required>
+                            <label for="username">اسم المستخدم</label>
+                        </div>
+                        <div class="input-field">
+                            <input type="password" name="password" id="password" placeholder=" " required>
+                            <label for="password">كلمة المرور</label>
+                        </div>
+                        <button type="submit" class="btn">دخول</button>
+                        <a href="#" class="forgot">نسيت كلمة المرور؟</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
